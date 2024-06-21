@@ -4,9 +4,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.InstantCommand
-import edu.wpi.first.wpilibj2.command.PrintCommand
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
+import frc.robot.commands.ToTableLegAutoCommandGroup
 import frc.robot.commands.ExampleCommand
+import frc.robot.commands.ToDrawerAutoCommand
 import frc.robot.subsystems.UltrasoundSubsystem
 import frc.robot.subsystems.XRPDrivetrain
 
@@ -34,8 +35,8 @@ object RobotContainer
     private enum class AutoMode(val optionName: String, val command: Command)
     {
         // TODO: Replace with real auto modes and their corresponding commands
-        CUSTOM_AUTO_1("Custom Auto Mode 1", ExampleCommand()),
-        CUSTOM_AUTO_2("Custom Auto Mode 2", PrintCommand("Auto Mode 2")),
+        CUSTOM_AUTO_1("To Desk Drawer from Table Leg", ToDrawerAutoCommand()),
+        CUSTOM_AUTO_2("To Table Leg", ToTableLegAutoCommandGroup()),
         ;
 
         companion object
@@ -56,7 +57,7 @@ object RobotContainer
     }
 
     fun drive() {
-        XRPDrivetrain.arcadeDrive(-1 * m_driverController.getRawAxis(1), -1 * m_driverController.getRawAxis(4))
+        XRPDrivetrain.arcadeDrive(-m_driverController.getRawAxis(1), -m_driverController.getRawAxis(4))
     }
 
     /**

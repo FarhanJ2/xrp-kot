@@ -6,8 +6,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 object ArmSubsystem : SubsystemBase() {
     private val m_armMotor = XRPServo(4)
 
-    fun setPosition() {
-        m_armMotor.setPosition(0.0)
+    fun setPosition(position: Double) {
+        m_armMotor.setPosition(position)
     }
 
     override fun periodic()
