@@ -10,10 +10,10 @@ import frc.robot.subsystems.ArmSubsystem
 class ToTableLegAutoCommandGroup : SequentialCommandGroup() {
     init {
         addCommands(
-            DriveCommand(1.0, 0.0, 0.6),
-            DriveCommand(0.8, -0.8, 1.5),
-            DriveCommand(-0.8, -0.4, 1.5),
-            DriveCommand(-0.9, -0.0, 0.8),
+            DriveCommand({ 1.0 }, { 0.0 }, 0.6),
+            DriveCommand({ 0.8 }, { -0.8 }, 1.5),
+            DriveCommand({ -0.8 }, { -0.4 }, 1.5),
+            DriveCommand({ -0.9 }, { -0.0 }, 0.8),
         )
     }
 }

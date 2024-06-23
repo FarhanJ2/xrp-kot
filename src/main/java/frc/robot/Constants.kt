@@ -7,5 +7,18 @@ package frc.robot
  * `const` definitions. Other constant types should use `val` definitions.
  */
 
-/** An example constant definition. */
-const val exampleConstant = 1
+class Constants {
+    class DriverConstants {
+        companion object DriverController {
+            const val K_DRIVER_PORT = 0
+            const val K_DRIVER_RAW_AXIS_LEFT = 1
+            const val K_DRIVER_RAW_AXIS_RIGHT = 4
+        }
+    }
+
+    class RecorderConstants {
+        companion object OffsetError {
+            const val OFFSET_ERROR = 1.5259021893143654E-5
+        }
+    }
+}
