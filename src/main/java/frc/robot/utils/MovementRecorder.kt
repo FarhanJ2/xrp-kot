@@ -23,11 +23,15 @@ object MovementRecorder {
         val timeDelta = currentTime - lastRecordTime
 
         // Apply threshold to treat near-zero values as zero
-        val adjustedDir = if (dir == Constants.RecorderConstants.OFFSET_ERROR) 0.0 else dir
-        val adjustedRot = if (rot == -Constants.RecorderConstants.OFFSET_ERROR) 0.0 else rot
+//        val adjustedDir = if (dir == Constants.RecorderConstants.OFFSET_ERROR) 0.0 else dir
+//        val adjustedRot = if (rot == -Constants.RecorderConstants.OFFSET_ERROR) 0.0 else rot
 
-        println("Recording - Dir: $adjustedDir, Rot: $adjustedRot, Duration: $duration, TimeDelta: $timeDelta")
-        movements.add(Movement(adjustedDir, adjustedRot, duration, timeDelta))
+        if (dir == Constants.RecorderConstants.OFFSET_ERROR && rot == -Constants.RecorderConstants.OFFSET_ERROR) {
+            println("Skipping Zero")
+        } else {
+            println("Recording - Dir: $dir, Rot: $rot, Duration: $duration, TimeDelta: $timeDelta")
+            movements.add(Movement(dir, rot, duration, timeDelta))
+        }
         lastRecordTime = currentTime
     }
 

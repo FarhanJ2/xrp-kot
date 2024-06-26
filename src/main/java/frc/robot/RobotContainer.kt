@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import frc.robot.commands.*
 import frc.robot.subsystems.UltrasoundSubsystem
 import frc.robot.subsystems.XRPDrivetrain
+import frc.robot.utils.MovementRecorder
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -35,7 +36,8 @@ object RobotContainer {
         // TODO: Replace with real auto modes and their corresponding commands
         CUSTOM_AUTO_1("To Desk Drawer from Table Leg", ToDrawerAutoCommand()),
         CUSTOM_AUTO_2("To Table Leg", ToTableLegAutoCommandGroup()),
-        CUSTOM_AUTO_3("Test PathPlanner", PlaybackCommand("2024-06-22_22-20-40-path.json"));
+        CUSTOM_AUTO_3("Test PathPlanner", PlaybackCommand("2024-06-23_14-14-02-path.json")),
+        CUSTOM_AUTO_4("Trash Can to Facing Bed", PlaybackCommand("2024-06-23_14-17-17-path.json"));
 
         companion object {
             /** The default auto mode. */
@@ -73,6 +75,9 @@ object RobotContainer {
         }))
 
         m_driverController.b().whileTrue(InstantCommand({
+            if (recordPath) {
+                MovementRecorder.saveMovementsToFile()
+            }
             recordPath = !recordPath
             println("Set recording status to $recordPath")
         }))

@@ -5,7 +5,7 @@ import frc.robot.subsystems.XRPDrivetrain
 import frc.robot.utils.Movement
 import frc.robot.utils.MovementRecorder
 import edu.wpi.first.wpilibj.Timer
-import frc.robot.Constants
+import edu.wpi.first.wpilibj2.command.CommandScheduler
 
 class PlaybackCommand(private val fileName: String, ) : Command() {
     private val xRPDrivetrain = XRPDrivetrain
@@ -32,7 +32,7 @@ class PlaybackCommand(private val fileName: String, ) : Command() {
             val duration = movement.duration
             val timeDelta = movement.timeDelta
 
-            if (Timer.getFPGATimestamp() - movementStartTime >= timeDelta) {
+            if (Timer.getFPGATimestamp() - movementStartTime >= duration) {
                 XRPDrivetrain.arcadeDrive(dir, rot)
                 currentMovementIndex++
                 movementStartTime = Timer.getFPGATimestamp()

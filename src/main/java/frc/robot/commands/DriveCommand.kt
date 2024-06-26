@@ -26,6 +26,8 @@ class DriveCommand(private val getForward: () -> Double, private val getRotation
         val rot = getRotation()
         val duration = 0.02 // 20ms
 
+//        println(dir)
+//        println(rot)
         xRPDrivetrain.arcadeDrive(dir, rot)
         if (RobotContainer.recordPath && !RobotState.isAutonomous()) {
             MovementRecorder.recordMovement(dir, rot, duration)
@@ -41,11 +43,14 @@ class DriveCommand(private val getForward: () -> Double, private val getRotation
     override fun end(interrupted: Boolean) {
         xRPDrivetrain.arcadeDrive(0.0, 0.0) // reset speed
 
-        // TODO CHECK IF IT IS NOT AUTON AND IF ANOTHER FLAG IS ON FOR IT TO SAVE
-        try {
-            MovementRecorder.saveMovementsToFile()
-        } catch (error: Error) {
-            println("Error saving path $error")
+        if (RobotContainer.recordPath) {
+            try {
+                MovementRecorder.saveMovementsToFile()
+            } catch (error: Error) {
+                println("Error saving path $error")
+            } finally {
+                RobotContainer.recordPath = false
+            }
         }
     }
 }

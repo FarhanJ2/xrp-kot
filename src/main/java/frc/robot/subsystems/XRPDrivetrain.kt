@@ -1,7 +1,11 @@
 package frc.robot.subsystems
 
+import edu.wpi.first.math.geometry.Rotation2d
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry
 import edu.wpi.first.wpilibj.Encoder
 import edu.wpi.first.wpilibj.drive.DifferentialDrive
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
+import edu.wpi.first.wpilibj.xrp.XRPGyro
 import edu.wpi.first.wpilibj.xrp.XRPMotor
 import edu.wpi.first.wpilibj2.command.SubsystemBase
 
@@ -23,8 +27,11 @@ object XRPDrivetrain : SubsystemBase()
     private val leftEncoder = Encoder(4, 5)
     private val rightEncoder = Encoder(6, 7)
 
+    private val gyro = XRPGyro()
+
     // Set up the differential drive controller
     private val diffDrive = DifferentialDrive(leftMotor, rightMotor)
+//    private val m_odometry = TODO();
 
     init
     {
@@ -32,9 +39,12 @@ object XRPDrivetrain : SubsystemBase()
         leftEncoder.distancePerPulse = Math.PI * WHEEL_DIAMETER_INCH / COUNTS_PER_REVOLUTION
         rightEncoder.distancePerPulse = Math.PI * WHEEL_DIAMETER_INCH / COUNTS_PER_REVOLUTION
         resetEncoders()
+        gyro.reset()
 
         // Invert right side since motor is flipped
         rightMotor.inverted = true
+
+//        m_odometry = DifferentialDriveOdometry(Rotation2d(gyro.angle))
     }
 
     val leftDistanceInch: Double
@@ -42,6 +52,12 @@ object XRPDrivetrain : SubsystemBase()
 
     val rightDistanceInch: Double
         get() = rightEncoder.distance
+
+    val gyroHeading: Double
+        get() = gyro.angle
+
+    val gyroRate: Double
+        get() = -gyro.rate
 
     fun arcadeDrive(xAxisSpeed: Double, zAxisRotate: Double)
     {
@@ -57,6 +73,10 @@ object XRPDrivetrain : SubsystemBase()
     override fun periodic()
     {
         // This method will be called once per scheduler run
+        SmartDashboard.putNumber("Left encoder value meters", rightEncoder.distance)
+        SmartDashboard.putNumber("Right encoder value meters", leftEncoder.distance)
+        SmartDashboard.putNumber("Gyro heading", gyroHeading)
+        SmartDashboard.putNumber("Turn rate", gyroRate)
     }
 
     override fun simulationPeriodic()
