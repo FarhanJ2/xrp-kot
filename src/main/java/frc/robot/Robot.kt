@@ -33,6 +33,9 @@ object Robot : TimedRobot()
         HAL.report(tResourceType.kResourceType_Language, tInstances.kLanguage_Kotlin, 0, WPILibVersion.Version)
         // Access the RobotContainer object so that it is initialized
         RobotContainer
+
+        // network tables init
+        RobotContainer.ntServer.setUpNetworkTables()
     }
 
     /**

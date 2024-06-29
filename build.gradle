@@ -24,6 +24,9 @@ def includeDesktopSupport = true
 dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0"
 
+    implementation 'edu.wpi.first.ntcore:ntcore-java:2024.1.1'
+    implementation 'org.java-websocket:Java-WebSocket:1.5.2'
+
     implementation wpi.java.deps.wpilib()
     implementation wpi.java.vendor.java()
 
@@ -54,7 +57,7 @@ wpi.sim.addDriverstation()
 
 //Sets the XRP Client Host
 //wpi.sim.envVar("HALSIMXRP_HOST", "192.168.42.1") // if using Access Point
-wpi.sim.envVar("HALSIMXRP_HOST", "192.168.1.184") // if using ATA (Network)
+wpi.sim.envVar("HALSIMXRP_HOST", "192.168.1.184") // if using STA (Network)
 wpi.sim.addXRPClient().defaultEnabled = true
 
 // Setting up my Jar File. In this case, adding all libraries into the main jar ('fat jar')
