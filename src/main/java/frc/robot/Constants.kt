@@ -12,13 +12,20 @@ class Constants {
         companion object DriverController {
             const val K_DRIVER_PORT = 0
             const val K_DRIVER_RAW_AXIS_LEFT = 1
-            const val K_DRIVER_RAW_AXIS_RIGHT = 4
+            const val K_DRIVER_RAW_AXIS_RIGHT = 4 // 2 if PS5
         }
     }
 
     class RecorderConstants {
         companion object OffsetError {
             const val OFFSET_ERROR = 1.5259021893143654E-5
+        }
+    }
+
+    class Paths {
+        companion object FilePaths {
+            const val MAC_PATH = "/Users/farhanjamil/Programming/"
+            const val WIN_PATH = "E:/Programming/robotics/"
         }
     }
 }

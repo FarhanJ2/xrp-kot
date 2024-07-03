@@ -1,10 +1,13 @@
 package frc.robot
 
+import edu.wpi.first.networktables.DoubleTopic
+import edu.wpi.first.networktables.NetworkTableInstance
 import edu.wpi.first.wpilibj.RobotState
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard
 import edu.wpi.first.wpilibj2.command.Command
 import edu.wpi.first.wpilibj2.command.InstantCommand
+import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController
 import frc.robot.commands.*
 import frc.robot.subsystems.UltrasoundSubsystem
@@ -20,8 +23,6 @@ import frc.robot.utils.NetworkTablesServer
  */
 object RobotContainer {
     val ntServer = NetworkTablesServer()
-
-//    val test = ntServer.ntInstance.
 
     private val m_driverController = CommandXboxController(Constants.DriverConstants.K_DRIVER_PORT)
     var recordPath = false
@@ -59,7 +60,8 @@ object RobotContainer {
         if (RobotState.isTeleop())
         {
             XRPDrivetrain.defaultCommand =
-                DriveCommand({ -m_driverController.getRawAxis(Constants.DriverConstants.K_DRIVER_RAW_AXIS_LEFT) }, { -m_driverController.getRawAxis(Constants.DriverConstants.K_DRIVER_RAW_AXIS_RIGHT) }, null)
+//                DriveCommand({ -m_driverController.getRawAxis(Constants.DriverConstants.K_DRIVER_RAW_AXIS_LEFT) }, { -m_driverController.getRawAxis(Constants.DriverConstants.K_DRIVER_RAW_AXIS_RIGHT) }, null)
+                DriveCommand({ ntServer.dirVal }, { ntServer.rotVal }, null)
         }
 
         SmartDashboard.putData("Auto choices", autoModeChooser)

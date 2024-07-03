@@ -39,7 +39,7 @@ object MovementRecorder {
         val currentDateTime = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")
         val formattedDateTime = currentDateTime.format(formatter)
-        val fileName = "E:/Programming/robotics/xrp-kot/src/main/java/frc/robot/paths/$formattedDateTime-path.json"
+        val fileName = "${Constants.Paths.MAC_PATH}xrp-kot/src/main/java/frc/robot/paths$formattedDateTime-path.json"
 
         val file = File(fileName)
         val json = Json { prettyPrint = true }

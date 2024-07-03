@@ -33,9 +33,6 @@ object Robot : TimedRobot()
         HAL.report(tResourceType.kResourceType_Language, tInstances.kLanguage_Kotlin, 0, WPILibVersion.Version)
         // Access the RobotContainer object so that it is initialized
         RobotContainer
-
-        // network tables init
-        RobotContainer.ntServer.setUpNetworkTables()
     }
 
     /**
@@ -52,6 +49,8 @@ object Robot : TimedRobot()
         // and running subsystem periodic() methods.  This must be called from the robot's periodic
         // block in order for anything in the Command-based framework to work.
         CommandScheduler.getInstance().run()
+
+        RobotContainer.ntServer.updateValuesPeriodic()
     }
 
     /** This method is called once each time the robot enters Disabled mode.  */
